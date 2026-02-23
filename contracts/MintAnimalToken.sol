@@ -9,9 +9,17 @@ contract MintAnimalToken is ERC721Enumerable {
   // 컨트랙트가 빌드될 때 한 번 실행됨 ERC721(name, symbol)
   constructor() ERC721("h662Animals", "HAS") {} 
 
+  mapping(uint256 => uint256) public animalTypes;
+
+
   function mintAnimalToken() public {
     // totalSupply -> 지금까지 민팅된 NFT 양
     uint256 animalTokenId = totalSupply() + 1; 
+
+    // random 값 뽑아내기
+    uint256 animalType = uint256(keccak256(abi.encodePacked(block.timestamp, msg.sender, animalTokenId))) % 5 + 1;
+
+    animalTypes[animalTokenId] = animalType;
 
     // ERC721에서 제공하는 minting 함수
     // msg.sender: 이 명령어를 실행한(minting 누른) 사람
