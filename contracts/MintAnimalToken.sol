@@ -11,7 +11,6 @@ contract MintAnimalToken is ERC721Enumerable {
 
   mapping(uint256 => uint256) public animalTypes;
 
-
   function mintAnimalToken() public {
     // totalSupply -> 지금까지 민팅된 NFT 양
     uint256 animalTokenId = totalSupply() + 1; 
